@@ -10,8 +10,11 @@ import {
     Button,
     useColorModeValue,
   } from '@chakra-ui/react';
-  
-  export default function Card_visita() {
+  import WebcamCapture from './webcam'
+  interface CardProps {
+    img: string;
+  }
+  export default function Card_visita({img}:CardProps) {
     return (
       <Center py={6}>
         <Box
@@ -25,15 +28,15 @@ import {
             h={'120px'}
             w={'full'}
             src={
-              'https://images.unsplash.com/photo-1612865547334-09cb8cb455da?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
+              'https://images.unsplash.com/photo-1636311550998-c6b6f26fd58a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=735&q=80'
             }
             objectFit={'cover'}
           />
           <Flex justify={'center'} mt={-12}>
-            <Avatar
+             <Avatar
               size={'xl'}
               src={
-                'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1331&q=80'
+                img
               }
               alt={'Author'}
               css={{
@@ -47,10 +50,10 @@ import {
             <Heading fontSize={'xl'} fontWeight={500} fontFamily={'arial'}>
                 VISITANTE
               </Heading>
-              <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
-                Gilberto Garcia Oliveira Sousa
+              <Heading fontSize={'xl'} fontWeight={500} fontFamily={'body'}>
+                Felipe sergio sousa
               </Heading>
-              <Text color={'gray.500'}>098.876.983-32</Text>
+              <Text fontSize={'sm'} color={'gray.500'}>098.876.983-32</Text>
             </Stack>
   
             <Stack direction={'row'} justify={'center'} spacing={6}>

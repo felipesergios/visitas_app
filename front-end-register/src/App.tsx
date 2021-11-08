@@ -1,4 +1,4 @@
-import * as React from "react"
+import React,{useState} from "react"
 import {
   ChakraProvider,
   Box,
@@ -14,13 +14,19 @@ import { Logo } from "./Logo"
 import Form_visita from './components/Form'
 import Card_visita from "./components/card"
 
-export const App = () => (
-  <ChakraProvider theme={theme}>
+//import WebcamCapture from './components/webcam'
+
+
+export default function App(){
+  
+  return(
+    <ChakraProvider theme={theme}>
     <Box textAlign="center" fontSize="xl">
    
     <Form_visita/>
     <ColorModeSwitcher justifySelf="flex" />
-    <Card_visita/>
     </Box>
   </ChakraProvider>
-)
+  )
+}
+

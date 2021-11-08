@@ -19,6 +19,7 @@
     "react-icons": "^3.0.0",
     "react-input-mask": "^2.0.4",
     "react-scripts": "4.0.3",
+    "react-webcam": "^6.0.0",
     "typescript": "^3.9.5",
     "web-vitals": "^0.2.2"
   },

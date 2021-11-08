@@ -1,3 +1,4 @@
+import React,{useState} from 'react';
 import {
   Box,
   Flex,
@@ -15,7 +16,7 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import InputMask from "react-input-mask";
-
+import WebcamCapture from './webcam'
 const avatars = [
   {
     name: 'Ryan Florence',
@@ -39,7 +40,14 @@ const avatars = [
   },
 ];
 
+
 export default function Form_visita() {
+  const [imagem, setImage] = useState ('');
+  const capture = React.useCallback(
+    () => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    setImage(imageSrc)
+    });
   return (
     <Box position={'relative'}>
       <Container
@@ -49,9 +57,10 @@ export default function Form_visita() {
         spacing={{ base: 10, lg: 32 }}
         py={{ base: 10, sm: 20, lg: 32 }}>
         <Stack spacing={{ base: 10, md: 20 }}>
+          
           <Heading
             lineHeight={1.1}
-            fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
+            fontSize={{ base: '2xl', sm: '3xl', md: '4xl', lg: '5xl' }}>
            Sistema de check-in{' '}
             <Text
               as={'span'}
@@ -66,7 +75,9 @@ export default function Form_visita() {
               bgClip="text">
               Faça seu registro agora mesmo 
             </Text>{' '}
+            <WebcamCapture/>
           </Heading> 
+
           <Stack direction={'row'} spacing={4} align={'center'}>
             <AvatarGroup>
               {avatars.map((avatar) => (
