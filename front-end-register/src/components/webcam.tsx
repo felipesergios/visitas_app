@@ -7,7 +7,6 @@ const videoConstraints = {
     height: 720,
     facingMode: "user"
   };
-  
   const WebcamCapture = () => {
     const webcamRef = React.useRef(null);
     const [imagem, setImage] = useState ('');
@@ -46,10 +45,9 @@ Capturar Novamente </Button>:<Button onClick={(e)=>{e.preventDefault();capture()
 }
 
 
-<Card_visita img={imagem}/>
        
 
       </Container>
     );
   };
-  export default WebcamCapture
+  export {WebcamCapture}

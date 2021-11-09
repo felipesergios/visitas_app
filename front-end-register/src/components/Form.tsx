@@ -11,12 +11,13 @@ import {
   SimpleGrid,
   Avatar,
   AvatarGroup,
-  useBreakpointValue,
   IconProps,
+  Image,
   Icon,
 } from '@chakra-ui/react';
 import InputMask from "react-input-mask";
-import WebcamCapture from './webcam'
+import Webcam from "react-webcam";
+import Card_visita from './card';
 const avatars = [
   {
     name: 'Ryan Florence',
@@ -25,29 +26,33 @@ const avatars = [
   {
     name: 'Segun Adebayo',
     url: 'https://bit.ly/sage-adebayo',
-  },
-  {
-    name: 'Kent Dodds',
-    url: 'https://bit.ly/kent-c-dodds',
-  },
-  {
-    name: 'Prosper Otemuyiwa',
-    url: 'https://bit.ly/prosper-baba',
-  },
-  {
-    name: 'Christian Nwamba',
-    url: 'https://bit.ly/code-beast',
-  },
+  }
 ];
+
+const videoConstraints = {
+  width: 1280,
+  height: 720,
+  facingMode: "user"
+};
+
 
 
 export default function Form_visita() {
+  const webcamRef = React.useRef(null);
   const [imagem, setImage] = useState ('');
+  const [nome,setNome]=useState('')
+  const [cpf,setCpf]=useState('')
+
   const capture = React.useCallback(
     () => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    setImage(imageSrc)
-    });
+      const imageSrc = webcamRef.current.getScreenshot();
+      setImage(imageSrc)
+    },
+    [webcamRef]
+  );
+
+ 
+  
   return (
     <Box position={'relative'}>
       <Container
@@ -75,7 +80,34 @@ export default function Form_visita() {
               bgClip="text">
               Faça seu registro agora mesmo 
             </Text>{' '}
-            <WebcamCapture/>
+            
+
+                <Container>
+
+                {imagem==''?<Webcam
+                audio={false}
+                height={720}
+                ref={webcamRef}
+                screenshotFormat="image/jpeg"
+                width={720}
+                videoConstraints={videoConstraints}
+                />: <Image src={imagem}/>}
+
+                {imagem!=''?
+                <Button onClick={(e)=>
+                {
+                e.preventDefault();
+                setImage('')
+                }}>
+                Capturar Novamente </Button>:<Button onClick={(e)=>{e.preventDefault();capture();}}>Capturar Foto</Button>
+                }
+
+
+
+
+                </Container>
+
+           
           </Heading> 
 
           <Stack direction={'row'} spacing={4} align={'center'}>
@@ -161,16 +193,19 @@ export default function Form_visita() {
                 _placeholder={{
                   color: 'gray.500',
                 }}
+                value={nome} onChange={e=>setNome(e.target.value)}
               />
-              <InputMask 
+              <Input 
                 mask="999.999.999-99"
                 placeholder="(CPF)"
-                bg={'gray.400'}
+                bg={'gray.100'}
+                maxLength="11"
                 border={0}
                 color={'gray.500'}
                 _placeholder={{
-                  color: 'black.700',
+                  color: 'black.500',
                 }}
+                value={cpf} onChange={e=>setCpf(e.target.value)}
               />
               <Input
                 placeholder="Motivo da visita"
@@ -194,8 +229,10 @@ export default function Form_visita() {
               />
               
             </Stack>
-            <Button
+           
+            {imagem==''?  <Button
               fontFamily={'heading'}
+              isDisabled={true}
               mt={8}
               w={'full'}
               bgGradient="linear(to-r, red.400,pink.400)"
@@ -205,7 +242,20 @@ export default function Form_visita() {
                 boxShadow: 'xl',
               }}>
               Registar entrada
-            </Button>
+            </Button>: <Button
+              fontFamily={'heading'}
+              isDisabled={false}
+              mt={8}
+              w={'full'}
+              bgGradient="linear(to-r, red.400,pink.400)"
+              color={'white'}
+              _hover={{
+                bgGradient: 'linear(to-r, red.400,pink.400)',
+                boxShadow: 'xl',
+              }}>
+              Registar entrada
+            </Button>}
+
           </Box>
           form
         </Stack>
@@ -216,6 +266,8 @@ export default function Form_visita() {
         left={-10}
         style={{ filter: 'blur(70px)' }}
       />
+
+{imagem==''? '': <Card_visita nome={nome} img={imagem} cpf={cpf}/>}
     </Box>
   );
 }

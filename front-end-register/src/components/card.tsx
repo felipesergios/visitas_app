@@ -13,8 +13,17 @@ import {
   import WebcamCapture from './webcam'
   interface CardProps {
     img: string;
+    nome:string;
+    cpf:string;
+    saida:string;
   }
-  export default function Card_visita({img}:CardProps) {
+  function getHoras(){
+    var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    return time
+}
+  export default function Card_visita({img,nome,cpf,saida}:CardProps) {
+    const horario = getHoras()
     return (
       <Center py={6}>
         <Box
@@ -51,25 +60,26 @@ import {
                 VISITANTE
               </Heading>
               <Heading fontSize={'xl'} fontWeight={500} fontFamily={'body'}>
-                Felipe sergio sousa
+              {nome==''? '': nome}
               </Heading>
-              <Text fontSize={'sm'} color={'gray.500'}>098.876.983-32</Text>
+              <Text fontSize={'sm'} color={'gray.500'}>{cpf==''?'':cpf}</Text>
             </Stack>
   
             <Stack direction={'row'} justify={'center'} spacing={6}>
               <Stack spacing={0} align={'center'}>
                   
-                <Text fontWeight={600}>09:25</Text>
+                <Text fontWeight={600}>{horario}</Text>
                 <Text fontSize={'sm'} color={'gray.500'}>
                   Entrada
                 </Text>
               </Stack>
-              <Stack spacing={0} align={'center'}>
+              
+              {saida==''?<Stack spacing={0} align={'center'}>
                 <Text fontWeight={600}>10:52</Text>
                 <Text fontSize={'sm'} color={'gray.500'}>
                   Saída
                 </Text>
-              </Stack>
+              </Stack>:''}
             </Stack>
   
             <Button
