@@ -10,7 +10,6 @@ import {
     Button,
     useColorModeValue,
   } from '@chakra-ui/react';
-  import WebcamCapture from './webcam'
   interface CardProps {
     img: string;
     nome:string;

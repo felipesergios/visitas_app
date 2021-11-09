@@ -1,0 +1,10 @@
+version: "2"
+services: 
+    webcamapp:
+        build: .
+        command: yarn start
+        ports: 
+            - "8081:3000"
+        volumes: 
+            - .:/usr/app
+            - /usr/app/node_modules
