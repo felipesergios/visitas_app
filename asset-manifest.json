@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/visitas_app/static/js/main.7655fe89.chunk.js",
+    "main.js.map": "/visitas_app/static/js/main.7655fe89.chunk.js.map",
+    "runtime-main.js": "/visitas_app/static/js/runtime-main.9b784b3b.js",
+    "runtime-main.js.map": "/visitas_app/static/js/runtime-main.9b784b3b.js.map",
+    "static/js/2.96d4a286.chunk.js": "/visitas_app/static/js/2.96d4a286.chunk.js",
+    "static/js/2.96d4a286.chunk.js.map": "/visitas_app/static/js/2.96d4a286.chunk.js.map",
+    "static/js/3.57971b98.chunk.js": "/visitas_app/static/js/3.57971b98.chunk.js",
+    "static/js/3.57971b98.chunk.js.map": "/visitas_app/static/js/3.57971b98.chunk.js.map",
+    "index.html": "/visitas_app/index.html",
+    "static/js/2.96d4a286.chunk.js.LICENSE.txt": "/visitas_app/static/js/2.96d4a286.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9b784b3b.js",
+    "static/js/2.96d4a286.chunk.js",
+    "static/js/main.7655fe89.chunk.js"
+  ]
+}
