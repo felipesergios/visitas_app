@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {
   Box,
   Flex,
@@ -18,6 +18,7 @@ import {
 import InputMask from "react-input-mask";
 import Webcam from "react-webcam";
 import Card_visita from './card';
+import api from "../services/api"
 const avatars = [
   {
     name: 'Ryan Florence',
@@ -37,11 +38,12 @@ const videoConstraints = {
 
 
 
-export default function Form_visita() {
+export default function Form_visita({onsubmit}) {
   const webcamRef = React.useRef(null);
   const [imagem, setImage] = useState ('');
   const [nome,setNome]=useState('')
   const [cpf,setCpf]=useState('')
+  const [motivo,setMotivo]=useState('')
 
   const capture = React.useCallback(
     () => {
@@ -51,6 +53,15 @@ export default function Form_visita() {
     [webcamRef]
   );
 
+
+    async function register(){
+    const res = await api.post('/',{nome,motivo,cpf,status:1})
+    console.log(cpf)
+    setNome('')
+    setCpf('')
+    setMotivo('')
+    setImage('')
+    }
  
   
   return (
@@ -182,7 +193,8 @@ export default function Form_visita() {
               Observação os dados informados aqui não são compartilhados de forma externa
             </Text>
           </Stack>
-          <Box as={'form'} mt={10}>
+          
+          <Box as={'form'} mt={10} onSubmit={register}>
             <Stack spacing={4}>
               <Input
                 type="text"
@@ -216,6 +228,7 @@ export default function Form_visita() {
                 _placeholder={{
                   color: 'gray.500',
                 }}
+                value={motivo} onChange={e=>setMotivo(e.target.value)}
               />
               <Input
                 placeholder="Outro documento ?"
@@ -244,6 +257,7 @@ export default function Form_visita() {
               Registar entrada
             </Button>: <Button
               fontFamily={'heading'}
+              onClick={register}
               isDisabled={false}
               mt={8}
               w={'full'}
@@ -251,12 +265,13 @@ export default function Form_visita() {
               color={'white'}
               _hover={{
                 bgGradient: 'linear(to-r, red.400,pink.400)',
-                boxShadow: 'xl',
+                boxShadow: 'xl'
               }}>
               Registar entrada
             </Button>}
-
+            
           </Box>
+          
           form
         </Stack>
       </Container>
